@@ -1,0 +1,55 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.8.RELEASE")
+    }
+}
+
+plugins {
+    id 'net.ltgt.apt' version '0.10'
+}
+
+def versionNumber= '0.1.0'
+group 'com.toumi'
+version versionNumber
+
+repositories {
+    mavenCentral()
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'project-report'
+
+
+
+
+repositories {
+    mavenCentral()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+
+configurations {
+    all*.exclude module : 'spring-boot-starter-logging'
+}
+
+dependencies {
+    compile 'org.projectlombok:lombok:1.16.20'
+    compile("org.springframework.boot:spring-boot-starter-log4j2")
+
+    compile("org.springframework.boot:spring-boot-starter-web:1.5.8.RELEASE")
+    compile("org.springframework.boot:spring-boot-starter-data-jpa:1.5.8.RELEASE")
+
+    compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.46'
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.7'
+
+    testCompile("com.h2database:h2:1.4.194")
+    testCompile("org.springframework.boot:spring-boot-starter-test")
+}
